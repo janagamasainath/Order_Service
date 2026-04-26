@@ -1,4 +1,4 @@
-package com.example.order_applicatioj.common;
+package com.example.demo.OrderApplicatiojApplication.common;
 
 
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ public class Payment {
     private String transactionId;
     private String paymetStatus;
 
-    private Integer order_Id; // comes from order servide
+    private Integer orderId; // comes from order servide
     private Double amount; // comes from orders service
 
 }

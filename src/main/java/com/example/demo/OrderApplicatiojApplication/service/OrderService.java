@@ -1,12 +1,11 @@
-package com.example.order_applicatioj.service;
+package com.example.demo.OrderApplicatiojApplication.service;
 
-import com.example.order_applicatioj.common.Payment;
-import com.example.order_applicatioj.common.TransactionRequest;
-import com.example.order_applicatioj.common.TransactionResponse;
-import com.example.order_applicatioj.model.Order;
-import com.example.order_applicatioj.repo.OrderRepo;
+import com.example.demo.OrderApplicatiojApplication.common.Payment;
+import com.example.demo.OrderApplicatiojApplication.common.TransactionRequest;
+import com.example.demo.OrderApplicatiojApplication.common.TransactionResponse;
+import com.example.demo.OrderApplicatiojApplication.model.Order;
+import com.example.demo.OrderApplicatiojApplication.repo.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,7 +29,7 @@ public class OrderService {
         Order savedOrder = orderRepo.save(order);
 
 
-        payment.setOrderId(savedOrder.getId());
+        payment.setOrderId(savedOrder.getOrderId());
         payment.setAmount(savedOrder.getPrice());
 
         String url = "http://PAYMENT-SERVICE/payment/dopayment";

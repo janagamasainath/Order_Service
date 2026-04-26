@@ -1,4 +1,4 @@
-package com.example.order_applicatioj.model;
+package com.example.demo.OrderApplicatiojApplication.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Alti_order")
+@Table(name = "ORDER_APPLICATION")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer order_Id;
+    private Integer orderId;
     private String order_name;
     private int quantity;
     private Double price;

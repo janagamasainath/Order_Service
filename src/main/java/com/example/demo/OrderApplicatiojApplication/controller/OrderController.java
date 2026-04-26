@@ -1,10 +1,8 @@
-package com.example.order_applicatioj.controller;
+package com.example.demo.OrderApplicatiojApplication.controller;
 
-import com.example.order_applicatioj.common.Payment;
-import com.example.order_applicatioj.common.TransactionRequest;
-import com.example.order_applicatioj.common.TransactionResponse;
-import com.example.order_applicatioj.model.Order;
-import com.example.order_applicatioj.service.OrderService;
+import com.example.demo.OrderApplicatiojApplication.common.TransactionRequest;
+import com.example.demo.OrderApplicatiojApplication.common.TransactionResponse;
+import com.example.demo.OrderApplicatiojApplication.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

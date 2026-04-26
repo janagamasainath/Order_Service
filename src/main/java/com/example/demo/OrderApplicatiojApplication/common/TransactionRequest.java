@@ -1,6 +1,6 @@
-package com.example.order_applicatioj.common;
+package com.example.demo.OrderApplicatiojApplication.common;
 
-import com.example.order_applicatioj.model.Order;
+import com.example.demo.OrderApplicatiojApplication.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
