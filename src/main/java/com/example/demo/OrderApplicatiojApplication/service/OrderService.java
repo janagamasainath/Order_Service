@@ -36,7 +36,7 @@ public class OrderService {
         Payment paymentResponse = restTemplate.postForObject(url, payment, Payment.class);
 
          orderMessage =
-                paymentResponse.getPaymetStatus().equalsIgnoreCase("Success")
+                paymentResponse.getPaymentStatus().equalsIgnoreCase("Success")
                         ? "Order placed successfully"
                         : "Payment failed, added to cart";
 
