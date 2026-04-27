@@ -8,10 +8,10 @@
 		<version>3.2.5</version>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Order_applicatioj</artifactId>
+	<artifactId>Order_application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Order_applicatioj</name>
-	<description>Order_applicatioj</description>
+	<name>Order_application</name>
+	<description>Order_application</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -41,6 +41,10 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
