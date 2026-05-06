@@ -5,7 +5,9 @@ import com.example.demo.OrderApplicatiojApplication.common.TransactionRequest;
 import com.example.demo.OrderApplicatiojApplication.common.TransactionResponse;
 import com.example.demo.OrderApplicatiojApplication.model.Order;
 import com.example.demo.OrderApplicatiojApplication.repo.OrderRepo;
+import org.apache.kafka.common.utils.KafkaThread;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +20,8 @@ public class OrderService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private KafkaTemplate<String, Order> kafkaTemplate;
 
     private String url;
 
