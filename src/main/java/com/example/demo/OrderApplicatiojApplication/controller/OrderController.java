@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public String placeOrder(@RequestBody Order event) {
+    public String placeOrder(@RequestBody TransactionRequest event) {
 //       / event.set("CREATED");
         orderService.sendOrder(event);
         return "Order placed successfully";

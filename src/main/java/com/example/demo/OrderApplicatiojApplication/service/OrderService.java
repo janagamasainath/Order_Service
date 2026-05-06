@@ -5,7 +5,6 @@ import com.example.demo.OrderApplicatiojApplication.common.TransactionRequest;
 import com.example.demo.OrderApplicatiojApplication.common.TransactionResponse;
 import com.example.demo.OrderApplicatiojApplication.model.Order;
 import com.example.demo.OrderApplicatiojApplication.repo.OrderRepo;
-import org.apache.kafka.common.utils.KafkaThread;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -48,7 +47,7 @@ public class OrderService {
                         ? "Order placed successfully"
                         : "Payment failed, added to cart";
 
-        return new TransactionResponse(
+         return new TransactionResponse(
                 savedOrder,
                 paymentResponse.getAmount(),
                 paymentResponse.getTransactionId(),
@@ -57,8 +56,8 @@ public class OrderService {
     }
 
     // for kafka data checking purpose
-    public void sendOrder(Order event) {
-        kafkaTemplate.send(TOPIC, event);
+    public void sendOrder(TransactionRequest event) {
+        kafkaTemplate.send(TOPIC, event.getOrder());
         System.out.println("Order sent: " + event);
     }
 }
