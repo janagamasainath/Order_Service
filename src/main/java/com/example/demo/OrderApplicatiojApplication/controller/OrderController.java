@@ -2,6 +2,7 @@ package com.example.demo.OrderApplicatiojApplication.controller;
 
 import com.example.demo.OrderApplicatiojApplication.common.TransactionRequest;
 import com.example.demo.OrderApplicatiojApplication.common.TransactionResponse;
+import com.example.demo.OrderApplicatiojApplication.model.Order;
 import com.example.demo.OrderApplicatiojApplication.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +22,13 @@ public class OrderController {
     public TransactionResponse bookOrder(@RequestBody TransactionRequest request) {
 
        return orderService.saveOrder(request);
+    }
 
-
+    @PostMapping
+    public String placeOrder(@RequestBody Order event) {
+//       / event.set("CREATED");
+        orderService.sendOrder(event);
+        return "Order placed successfully";
     }
 
 }

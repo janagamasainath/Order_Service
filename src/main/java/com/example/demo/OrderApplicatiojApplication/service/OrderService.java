@@ -23,9 +23,13 @@ public class OrderService {
     @Autowired
     private KafkaTemplate<String, Order> kafkaTemplate;
 
+    private static final String TOPIC = "order-topic";
+
     private String url;
 
     public TransactionResponse saveOrder(TransactionRequest request) {
+
+
         String orderMessage = "";
         Order order = request.getOrder();
         Payment payment =request.getPayment();
@@ -50,5 +54,11 @@ public class OrderService {
                 paymentResponse.getTransactionId(),
                 orderMessage
         );
+    }
+
+    // for kafka data checking purpose
+    public void sendOrder(Order event) {
+        kafkaTemplate.send(TOPIC, event);
+        System.out.println("Order sent: " + event);
     }
 }
