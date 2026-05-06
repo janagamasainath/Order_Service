@@ -56,8 +56,22 @@ public class OrderService {
     }
 
     // for kafka data checking purpose
-    public void sendOrder(TransactionRequest event) {
-        kafkaTemplate.send(TOPIC, event.getOrder());
-        System.out.println("Order sent: " + event);
+    public void sendOrder(TransactionRequest request) {
+
+
+            // 1. Save Order first
+            Order savedOrder = orderRepo.save(request.getOrder());
+
+            // 2. Set payment details
+            Payment payment = request.getPayment();
+            payment.setOrderId(savedOrder.getOrderId());
+            payment.setAmount(savedOrder.getPrice());
+
+            // 3. Send to Kafka
+            request.setOrder(savedOrder);
+            request.setPayment(payment);
+
+            kafkaTemplate.send("order-topic", request.getOrder());
+        }
     }
-}
+

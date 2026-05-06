@@ -1,5 +1,6 @@
 package com.example.demo.OrderApplicatiojApplication.controller;
 
+import com.example.demo.OrderApplicatiojApplication.common.Payment;
 import com.example.demo.OrderApplicatiojApplication.common.TransactionRequest;
 import com.example.demo.OrderApplicatiojApplication.common.TransactionResponse;
 import com.example.demo.OrderApplicatiojApplication.model.Order;
@@ -24,10 +25,18 @@ public class OrderController {
        return orderService.saveOrder(request);
     }
 
-    @PostMapping
-    public String placeOrder(@RequestBody TransactionRequest event) {
-//       / event.set("CREATED");
-        orderService.sendOrder(event);
+    @PostMapping("/bookorders")
+    public String placeOrder(@RequestBody TransactionRequest request) {
+        // Extract objects
+        Order order = request.getOrder();
+        Payment payment = request.getPayment();
+
+        // Set derived values
+        payment.setOrderId(order.getOrderId());   // will be null before save
+        payment.setAmount(order.getPrice());
+
+        orderService.sendOrder(request);
+
         return "Order placed successfully";
     }
 
