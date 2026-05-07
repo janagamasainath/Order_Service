@@ -31,23 +31,31 @@ public class OrderService {
 
         String orderMessage = "";
         Order order = request.getOrder();
-        Payment payment =request.getPayment();
+        Payment payment = request.getPayment();
 
+        //1. save order fisrst
         Order savedOrder = orderRepo.save(order);
 
-
+        // 2. Set payment details
         payment.setOrderId(savedOrder.getOrderId());
         payment.setAmount(savedOrder.getPrice());
+
+        //send to kafka
+        request.setOrder(savedOrder);
+        request.setPayment(payment);
+
+        kafkaTemplate.send("order-topic", request.getOrder());
 
         String url = "http://PAYMENT-SERVICE/payment/dopayment";
         Payment paymentResponse = restTemplate.postForObject(url, payment, Payment.class);
 
-         orderMessage =
+        orderMessage =
                 paymentResponse.getPaymentStatus().equalsIgnoreCase("Success")
                         ? "Order placed successfully"
                         : "Payment failed, added to cart";
 
-         return new TransactionResponse(
+
+        return new TransactionResponse(
                 savedOrder,
                 paymentResponse.getAmount(),
                 paymentResponse.getTransactionId(),
@@ -55,23 +63,5 @@ public class OrderService {
         );
     }
 
-    // for kafka data checking purpose
-    public void sendOrder(TransactionRequest request) {
-
-
-            // 1. Save Order first
-            Order savedOrder = orderRepo.save(request.getOrder());
-
-            // 2. Set payment details
-            Payment payment = request.getPayment();
-            payment.setOrderId(savedOrder.getOrderId());
-            payment.setAmount(savedOrder.getPrice());
-
-            // 3. Send to Kafka
-            request.setOrder(savedOrder);
-            request.setPayment(payment);
-
-            kafkaTemplate.send("order-topic", request.getOrder());
-        }
-    }
+}
 

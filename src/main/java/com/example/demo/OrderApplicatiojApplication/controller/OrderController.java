@@ -25,19 +25,4 @@ public class OrderController {
        return orderService.saveOrder(request);
     }
 
-    @PostMapping("/bookorders")
-    public String placeOrder(@RequestBody TransactionRequest request) {
-        // Extract objects
-        Order order = request.getOrder();
-        Payment payment = request.getPayment();
-
-        // Set derived values
-        payment.setOrderId(order.getOrderId());   // will be null before save
-        payment.setAmount(order.getPrice());
-
-        orderService.sendOrder(request);
-
-        return "Order placed successfully";
-    }
-
 }
